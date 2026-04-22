@@ -1,0 +1,48 @@
+services:
+  bot:
+    build: .
+    image: advert-bot:latest
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://advert:advert@postgres:5432/advert
+      METRICS_PORT: "9090"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: advert
+      POSTGRES_PASSWORD: advert
+      POSTGRES_DB: advert
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U advert -d advert"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./deploy/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9091:9090"
+    restart: unless-stopped
+    depends_on:
+      - bot
+
+volumes:
+  pgdata:
+  prometheus_data:

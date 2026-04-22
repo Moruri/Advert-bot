@@ -205,3 +205,36 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ----- Advert-bot project-specific -----
+# Local secrets & runtime config
+.env
+.env.*
+!.env.example
+config.py
+config.local.py
+secrets/
+*.pem
+*.key
+
+# Runtime data
+*.sqlite
+*.sqlite3
+*.db
+data/
+logs/
+*.log
+
+# Google Ads credentials
+google-ads.yaml
+google_ads.yaml
+oauth_token.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Prometheus scratch
+prometheus_data/
+grafana_data/

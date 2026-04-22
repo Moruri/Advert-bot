@@ -1,0 +1,65 @@
+# UK-signal keyword list used by app/services/targeting.py
+# Each category maps to a weight contributing to the composite UK confidence score.
+# Keep entries lowercase; matching is case-insensitive.
+
+strong:
+  weight: 1.0
+  terms:
+    - "united kingdom"
+    - "great britain"
+    - ".co.uk"
+    - "gbp"
+    - "£"
+    - "hmrc"
+    - "nhs"
+    - "royal mail"
+    - "ofcom"
+    - "ofgem"
+    - "dvla"
+
+cities:
+  weight: 0.7
+  terms:
+    - "london"
+    - "manchester"
+    - "birmingham"
+    - "liverpool"
+    - "leeds"
+    - "glasgow"
+    - "edinburgh"
+    - "bristol"
+    - "sheffield"
+    - "cardiff"
+    - "belfast"
+    - "newcastle"
+    - "nottingham"
+    - "southampton"
+    - "brighton"
+
+regions:
+  weight: 0.6
+  terms:
+    - "england"
+    - "scotland"
+    - "wales"
+    - "northern ireland"
+    - "uk"
+
+culture:
+  weight: 0.3
+  terms:
+    - "britain"
+    - "british"
+    - "brit"
+    - "pound sterling"
+    - "quid"
+    - "premier league"
+    - "bbc"
+    - "tesco"
+    - "sainsbury"
+
+language_codes:
+  weight: 0.5
+  terms:
+    - "en-gb"
+    - "en_gb"
